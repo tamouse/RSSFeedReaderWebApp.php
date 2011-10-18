@@ -17,6 +17,7 @@ if ($dbg->is_on()) {
   error_reporting(-1);
   ini_set("display_errors","on");
   ini_set("display_startup_errors","on");
+  ini_set("html_errors","on");
 }
 
 include("lib/smarty/libs/Smarty.class.php");
