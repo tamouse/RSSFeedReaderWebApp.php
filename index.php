@@ -13,6 +13,11 @@
 include("lib/rssreader.php");
 include("lib/class.Debug.php");
 $dbg = new Debug(FALSE);
+if ($dbg->is_on()) {
+  error_reporting(-1);
+  ini_set("display_errors","on");
+  ini_set("display_startup_errors","on");
+}
 
 include("lib/smarty/libs/Smarty.class.php");
 $smarty = new Smarty;
@@ -34,12 +39,13 @@ foreach ($MyFeeds as $feed => $url) {
   $rss->parse();
   $goodstories = array_merge($goodstories, process_stories($rss->stories));
   $dbg->p(": goodstories: ",$goodstories,__FILE__,__LINE__);
-  if ($dbg->is_on) echo "---------------\n\n";
+  if ($dbg->is_on()) echo "---------------\n\n";
   
 }
 
-if ($dbg->is_on) echo "****************** END OF PROCESSING ******************\n\n\n";
+if ($dbg->is_on()) echo "****************** END OF PROCESSING ******************\n\n\n";
 
+header("Content-type: application/rss+xml");
 
 $smarty->assign("stories",$goodstories);
 $smarty->display("index.tpl");
