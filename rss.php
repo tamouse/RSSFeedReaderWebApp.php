@@ -49,7 +49,7 @@ if ($dbg->is_on()) echo "****************** END OF PROCESSING ******************
 header("Content-type: application/rss+xml");
 
 $smarty->assign("stories",$goodstories);
-$smarty->display("index.tpl");
+$smarty->display("rss.tpl");
 
 
 /**
